@@ -1,19 +1,30 @@
-/**
- * Created by admin on 2017/2/9.
- */
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-    entry: __dirname + "/app/main.js",
-    output: {path: __dirname + "/build", filename: "[name]-[hash].js"},
-    module: {
-        loaders: [{test: /\.json$/, loader: "json"}, {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel'
-        }, {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')}]
+    devtool: "eval-source-map", //配置生成Source Maps，选择合适的选项
+    entry: __dirname + "/app/main.js",  //入口惟一文件
+    output: {
+        path: __dirname + "/public",  //打包后文件存放的地方
+        filename: "bundle.js"  //打包后的文件名
     },
-    postcss: [require('autoprefixer')],
-    plugins: [newHtmlWebpackPlugin({template: __dirname + "/app/index.tmpl.html"}), newwebpack.optimize.OccurenceOrderPlugin(), newwebpack.optimize.UglifyJsPlugin(), newExtractTextPlugin("[name]-[hash].css")]
+    module: {
+      loaders: [
+          {
+              test: /\.json$/,
+              loader: "json"
+          },
+          {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              loaders: "babel",  //在webpack的module部分的loaders里进行配置即可
+              query: {
+                  presets: ["es2015"]
+              }
+          }
+      ]
+    },
+    devServer: {
+        contentBase: "./public",  //本地服务器所加载的页面所在的路径
+        colors: true,  //终端中输出结果为彩色
+        historyApiFallBack: true,  //不跳转
+        inline: true  //实时刷新
+    }
 }
