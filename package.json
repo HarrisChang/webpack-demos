@@ -1,0 +1,22 @@
+{
+  "name": "webpack-demos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrisChang/webpack-demos.git"
+  },
+  "author": "harris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarrisChang/webpack-demos/issues"
+  },
+  "homepage": "https://github.com/HarrisChang/webpack-demos#readme",
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
+}
