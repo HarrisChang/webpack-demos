@@ -1,28 +1,43 @@
-'use strict';
-
-const webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
-    context: __dirname + '/src',
     entry: {
-        app: './app.js'
-        /*events: './events.js',
-        contact: './contact.js'*/
+        app: './app',  //编译的入口文件
+        index: './index'  //编译的入口文件
     },
     output: {
-        filename: '[name].bundle.js',
-        path: __dirname + '/dist/assets',
-        publicPath: '/assets'
+        publicPath: '/build/',  //服务器根路径
+        path: './build',  //编译到当前目录
+        filename: '[name].js'  //编译后的文件名
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: ['babel?preset=es2015']
+            },
+            {
+                test: /\.css$/,
+                loader: ['style', 'css', 'autoprefixer']
+            },
+            {
+                test: /\.less/,
+                loader: ['style', 'css', 'autoprefixer', 'less']
+            },
+            {
+                test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
+                loader: 'file-loader?name=[hash].[ext]'
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url?limit=1200&name=[hast].[ext]'  //limit后面的参数，当图片大小小于该参数时，会自动启用base64编码图片
+            }
+        ]
     },
     plugins: [
-        //在output文件里，如果有任意模块加载了两次或更多，它就会被打包进一个叫commons.js的文件里。
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'commons',
-            filename: 'commons.js',
-            minChunks: 2
-        })
+        new webpack.optimize.CommonsChunkPlugin('common.js')  //将公用模块打包进common.js
     ],
-    devServer: {
-        contentBase: __dirname + '/src'
+    resolve: {
+        extensions: ['', '.js', '.jsx']  //后缀名自动补全
     }
 }
