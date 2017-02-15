@@ -1,37 +1,28 @@
-/**
- * Created by admin on 2017/2/14.
- */
+'use strict';
+
+const webpack = require('webpack');
+
 module.exports = {
-    devtool: 'eval-source-map',  //配置生成Source Maps, 选择合适的选项
-    entry: __dirname + '/app/main.js',  //唯一入口文件
+    context: __dirname + '/src',
+    entry: {
+        app: './app.js'
+        /*events: './events.js',
+        contact: './contact.js'*/
+    },
     output: {
-        path: __dirname + '/public',  //打包后的文件存放的地方
-        filename: 'bundle.js'  //打包后输出文件的文件名
+        filename: '[name].bundle.js',
+        path: __dirname + '/dist/assets',
+        publicPath: '/assets'
     },
-    module: {
-        loaders: [
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel',  //在webpack的module部分的loaders里进行配置即可
-                query: {
-                    presets: ['es2015']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: 'style!css?modules'  //添加对样式表的处理
-            }
-        ]
-    },
+    plugins: [
+        //在output文件里，如果有任意模块加载了两次或更多，它就会被打包进一个叫commons.js的文件里。
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'commons',
+            filename: 'commons.js',
+            minChunks: 2
+        })
+    ],
     devServer: {
-        contentBase: './public',  //本地服务器所加载的页面所在的目录
-        colors: true,  //终端中输出结果为彩色
-        historyApiFallback: true,  //不切换
-        inline: true  //实时刷新
+        contentBase: __dirname + '/src'
     }
 }
