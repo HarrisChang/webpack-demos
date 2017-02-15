@@ -13,6 +13,18 @@ module.exports = {
             {
                 test: /\.json$/,
                 loader: 'json'
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel',  //在webpack的module部分的loaders里进行配置即可
+                query: {
+                    presets: ['es2015']
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css?modules'  //添加对样式表的处理
             }
         ]
     },
