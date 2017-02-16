@@ -10,16 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/HarrisChang/webpack-demos.git"
   },
+  "keywords": [
+    "webpack2"
+  ],
   "author": "harris",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HarrisChang/webpack-demos/issues"
   },
-  "homepage": "https://github.com/HarrisChang/webpack-demos#readme",
-  "devDependencies": {
-    "css-loader": "^0.26.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.12.15",
-    "webpack-dev-server": "^2.3.0"
-  }
+  "homepage": "https://github.com/HarrisChang/webpack-demos#readme"
 }
