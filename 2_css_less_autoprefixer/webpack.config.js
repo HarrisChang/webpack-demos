@@ -7,7 +7,8 @@ var extractCSS = new ExtractTextPlugin('[name].css')
 module.exports = {
     entry: {
         'page1/main': ROOT + '/src/page1/main',
-        'page2/main': ROOT + '/src/page2/main'
+        'page2/main': ROOT + '/src/page2/main',
+        'page3/main': ROOT + '/src/page3/main'
     },
     output: {
         path: ROOT + '/dist',
@@ -51,8 +52,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    plugins: [
-        extractCSS
-    ]
+    }
 }
